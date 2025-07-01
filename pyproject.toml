@@ -1,0 +1,11 @@
+[project]
+name = "simple-openstack-mcp"
+author="choieastsea@gmail.com"
+version = "0.1.0"
+description = "Execute openstack cli via LLMs!"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=2.9.2",
+    "python-openstackclient>=8.1.0",
+]
