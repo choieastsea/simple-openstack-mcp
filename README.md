@@ -45,7 +45,6 @@ claude desktop을 사용한다면 `claude_desktop_config.json`에 아래와 같�
 ### fastmcp 서버 실행
 해당 repository 디렉토리에서 다음 명령어가 정상적으로 수행되면 됩니다.
 ```
-❯uv init
-❯uv install
+❯uv sync
 ❯uv run server.py
 ```
