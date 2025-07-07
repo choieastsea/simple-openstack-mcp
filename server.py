@@ -15,9 +15,13 @@ def exec_openstack(cmd: str) -> str:
     return OpenStackCommander.execute(cmd)
 
 
-if __name__ == "__main__":
+def main():
     clouds_yaml_path = os.path.join(os.getcwd(), "clouds.yaml")
     if os.path.exists(clouds_yaml_path):
         os.environ["OS_CLIENT_CONFIG_FILE"] = clouds_yaml_path
     print("Using clouds.yaml from:", os.environ["OS_CLIENT_CONFIG_FILE"])
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()
