@@ -9,3 +9,6 @@ dependencies = [
     "fastmcp>=2.9.2",
     "python-openstackclient>=8.1.0",
 ]
+
+[project.scripts]
+simple-openstack-mcp = "server:main"
