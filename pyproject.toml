@@ -1,6 +1,8 @@
 [project]
 name = "simple-openstack-mcp"
-author="choieastsea@gmail.com"
+authors = [
+    {email = "choieastsea@gmail.com"},
+]
 version = "0.1.0"
 description = "Execute openstack cli via LLMs!"
 readme = "README.md"
@@ -10,5 +12,8 @@ dependencies = [
     "python-openstackclient>=8.1.0",
 ]
 
-[project.scripts]
+[project.entry-points."console_scripts"]
 simple-openstack-mcp = "server:main"
+
+[tool.setuptools]
+py-modules = ["server", "commander"]
