@@ -1,16 +1,16 @@
-# simple-openstack-mcp
 
-`openstack-cli`를 실행할 수 있는 환경에서, 복잡한 오픈스택 명령어 실행을 llm이 대신해줄 수 있도록 하는 fastmcp 기반의 mcp 서버입니다.
+# simple-openstack-mcp
+This is a `fastmcp`-based MCP server that allows an LLM to execute complex OpenStack commands for you in an environment where `openstack-cli` is runnable.
 
 ## How To
 
-### openstack 관련 설정
+### OpenStack Configuration
 
-해당 mcp 서버가 실행되는 환경에서 openstack cli가 실행 가능해야하며, `clouds.yaml`에 접근하고자 하는 오픈스택의 인증 정보가 저장되어 있어야 합니다. 예시는 다음과 같습니다.
+The `openstack-cli` must be executable in the environment where this MCP server runs. Additionally, the authentication credentials for the target OpenStack cloud must be stored in `clouds.yaml`. Here is an example:
 
 ```yaml
 clouds:
-  ...: # openstack명
+  ...: # openstack_cloud_name
     auth:
       auth_url: ...
       username: ...
@@ -23,8 +23,9 @@ clouds:
     identity_api_version: 3
 ```
 
-### mcp tool 연결
-claude desktop을 사용한다면 `claude_desktop_config.json`에 아래와 같이 추가합니다. (이외에 사용하고자 하는 llm client에 다음과 같은 설정을 추가하면 됩니다)
+### Connecting the MCP Tool
+
+If you are using `Claude Desktop` or `VScode Copilot`, add the following to your claude_desktop_config.json. You can add similar settings to other LLM clients you wish to use.
 
 ```json
 {
@@ -34,17 +35,35 @@ claude desktop을 사용한다면 `claude_desktop_config.json`에 아래와 같�
         "args": [
           "--directory",
           "${REPOSITORY_ABS_PATH}/simple-openstack-mcp",
-          "run",
-          "server.py"
+          "-m",
+          "server"
         ]
       }
     }
 }
+```
 
+If you don't have the repository cloned locally, you can also run it with uvx:
+
+```json
+{
+    "mcpServers": {
+      "openstack": {
+        "command": "uvx",
+        "args": [
+          "--from",
+          "git+https://github.com/choieastsea/simple-openstack-mcp",
+          "simple-openstack-mcp"
+        ]
+      }
+    }
+}
 ```
-### fastmcp 서버 실행
-해당 repository 디렉토리에서 다음 명령어가 정상적으로 수행되면 됩니다.
-```
-❯uv sync
-❯uv run server.py
+## Running the fastmcp Server locally
+
+The following commands should run successfully from the repository directory:
+
+```bash
+❯ uv sync
+❯ uv run -m server
 ```
